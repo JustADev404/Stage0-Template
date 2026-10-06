@@ -1,48 +1,59 @@
-/*
- * Copyright 2026 FRCSoftware
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+import java.util.ArrayList;
+import java.util.List;
 
-// Import `ArrayList` and `List` from the `java.util` package.
+interface IntakeSensor {
+    double distanceMillimeters();
+}
 
+class BeamBreak implements IntakeSensor {
+    @Override
+    public double distanceMillimeters() {
+        return 3.0;
+    }
+}
 
-// Define an interface named `IntakeSensor` with a single method:
-// `double distanceMillimeters();`
+class LaserCAN implements IntakeSensor {
+    @Override
+    public double distanceMillimeters() {
+        return 5.0;
+    }
+}
 
+public class Pair<A, B> {
+    private final A first;
+    private final B second;
 
-// Create a `BeamBreak` class that implements `IntakeSensor`.
-// The method `distanceMillimeters()` should return `3.0`.
+    Pair(A first, B second) {
+        this.first = first;
+        this.second = second;
+    }
 
+    public A getFirst() {
+        return first;
+    }
 
-// Create a `LaserCAN` class that implements `IntakeSensor`.
-// The method `distanceMillimeters()` should return `5.0`.
-
-
-// Define a generic class named `Pair<A, B>` with two private final fields:
-// `first` of type `A`, and `second` of type `B`.
-// Provide a constructor `Pair(A first, B second)` and getter methods
-// `getFirst()` and `getSecond()`.
-
+    public B getSecond() {
+        return second;
+    }
+}
 
 void main() {
-    // Create a variable named `beamBreak` with type `IntakeSensor`, and assign it a new instance of BeamBreak.
-    // Create a variable named `laserCAN` of type `IntakeSensor`, and assign it a new instance of LaserCAN.
-    // Print the result of calling `distanceMillimeters()` on both sensors.
+    IntakeSensor beamBreak = new BeamBreak();
+    IntakeSensor laserCAN = new LaserCAN();
+    System.out.println(beamBreak.distanceMillimeters());
+    System.out.println(laserCAN.distanceMillimeters());
 
+    Pair<String, Integer> pair = new Pair<>("Robot", 254);
+    System.out.println(pair.getFirst() + " " + pair.getSecond());
 
-    // Create a Pair of String and Integer (Pair<String, Integer>) with the values "Robot" and 254.
-    // Print the first value and the second value separated by a space using getFirst() and getSecond().
+    List<String> subsystems = new ArrayList<>();
+    subsystems.add("Drivetrain");
+    subsystems.add("Intake");
+    subsystems.add("Shooter");
 
+    System.out.println(subsystems.size());
 
-    // Create a List of Strings (`List<String>`) named `subsystems` using `new ArrayList<>()`.
-    // Add the strings "Drivetrain", "Intake", and "Shooter" to `subsystems`.
-
-
-    // Print the size of the `subsystems` list.
-
-
-    // Using a for-each loop, iterate over `subsystems` and print each subsystem name.
-
-
+    for (int i = 0; i <= subsystems.size(); i++) {
+        System.out.println(subsystems.get(i));
+    }
 }
